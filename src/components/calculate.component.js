@@ -58,7 +58,7 @@ const LoginForm = () => {
           axios.post('https://finanzasapirestful.azurewebsites.net/DatosBono', {calcu}).then(res=>{
             console.log(res);
             setSubmitting(false);
-            navigate('/results');
+            navigate('/result');
           }).catch(err=>{
             console.error(err);
           })
