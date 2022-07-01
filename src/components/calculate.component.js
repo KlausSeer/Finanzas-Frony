@@ -1,89 +1,59 @@
-import React from "react";
-import { useFormik } from "formik";
+import React from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
-const validate = (values) => {
-  const errors = {};
-  if (!values.VN) {
-    errors.user = "Required";
-  }
-
-  if (!values.TNA) {
-    errors.user = "Required";
-  }
-
-  if (!values.CAN) {
-    errors.user = "Required";
-  }
-
-  return errors;
-};
-
-const CalculateForm = () => {
+const LoginForm = () => {
   const navigate = useNavigate();
-
-  const formik = useFormik({
-    initialValues: {
-      VN: "",
-      TNA: "",
-      CAN: ""
-    },
-    validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      navigate("/result");
-    }
-  });
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <h3>Bonista</h3>
+    <Formik
+      initialValues={{ VN: '', TNA: '', CAN: ''}}
+      validationSchema={Yup.object({
+        VN: Yup.number()
+          .required('Required'),
+        TN: Yup.string()
+          .required('Required'),
+        CAN: Yup.string()
+        .required('Required'),
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+          navigate('/result');
+        }, 400);
+      }}
+    >
+      <Form>
+        <h3>Sign In</h3>
+        
+        <div className="mb-3">
+          <label htmlFor="VN">Valor del Prestamo</label>
+          <Field name="VN" type="number" className="form-control" placeholder="500000"/>
+          <ErrorMessage name="VN" />
+        </div>
 
-      <div className="mb-3">
-        <label>Valor del Prestamo</label>
-        <input
-          id="VN"
-          name="VN"
-          type="number"
-          className="form-control"
-          placeholder="500000"
-          onChange={formik.handleChange}
-          value={formik.values.VN}
-        />
-      </div>
+        <div className="mb-3">
+          <label htmlFor="TNA">Tasa Pactada (TNA)</label>
+          <Field name="TNA" type="number" className="form-control" placeholder="0.03"/>
+          <ErrorMessage name="TNA" />
+        </div>
 
-      <div className="mb-3">
-        <label>Tasa Pactada TNA</label>
-        <input
-          id="TNA"
-          name="TNA"
-          type="number"
-          className="form-control"
-          placeholder="0.03"
-          onChange={formik.handleChange}
-          value={formik.values.TIR}
-        />
-      </div>
+        <div className="mb-3">
+          <label htmlFor="CAN">Cantidad de Cuotas</label>
+          <Field name="CAN" type="number" className="form-control" placeholder="20"/>
+          <ErrorMessage name="CAN" />
+        </div>
 
-      <div className="mb-3">
-        <label>Cantidad de Cuotas</label>
-        <input
-          id="CAN"
-          name="CAN"
-          type="number"
-          className="form-control"
-          placeholder="20"
-          onChange={formik.handleChange}
-          value={formik.values.CAN}
-        />
-      </div>
-
-      <div className="d-grid">
-        <button type="submit" className="button-primary">
-          Calcular
-        </button>
-      </div>
-    </form>
+        <div className="d-grid">
+          <button type="submit" className="button-primary">
+            Calculate
+          </button>
+        </div>
+      </Form>
+    </Formik>
   );
 };
 
-export default CalculateForm;
+export default LoginForm;

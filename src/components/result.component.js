@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react'
-export default function Posts() {
-  const [post, getPost] = useState([])
+export default function Result() {
+  const [result, getResult] = useState([])
   const API = '';
-  const fetchPost = () => {
+  const fetchResult = () => {
     fetch(API)
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        getPost(res)
+        getResult(res)
       })
   }
   useEffect(() => {
-    fetchPost()
+    fetchResult()
   }, [])
   return (
     <>
       <h2>Resultado</h2>
-      <ul>
-        <li><text></text></li>
-        <li><text></text></li>
-        <li><text></text></li>
-      </ul>
+      <br></br>
+      <h3>TIR:</h3>
+      <h3>VAN:</h3>
     </>
   )
 }
