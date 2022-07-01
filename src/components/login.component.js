@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -18,10 +19,19 @@ const LoginForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-          navigate('/calculate');
+          const user = {
+            "Correo": values.correo,
+            "Nombres": "",
+            "Password": values.password,
+            "Apellido": ""
+          }
+          axios.post('https://finanzasapirestful.azurewebsites.net/SignIn', {user}).then(res=>{
+            console.log(res);
+            setSubmitting(false);
+            navigate('/calculate');
+          }).catch(err=>{
+            console.error(err);
+          })
         }, 400);
       }}
     >
@@ -29,14 +39,14 @@ const LoginForm = () => {
         <h3>Sign In</h3>
         
         <div className="mb-3">
-          <label htmlFor="user">First Name</label>
-          <Field name="user" type="text" className="form-control" placeholder="User Name"/>
-          <ErrorMessage name="user" />
+          <label htmlFor="email">Correo</label>
+          <Field name="email" type="text" className="form-control" placeholder="Correo"/>
+          <ErrorMessage name="email" />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="password">Password</label>
-          <Field name="password" type="text" className="form-control" placeholder="Enter Password" />
+          <label htmlFor="password">Contraseña</label>
+          <Field name="password" type="password" className="form-control" placeholder="Ingresa Contraseña" />
           <ErrorMessage name="password" />
         </div>
 

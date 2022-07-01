@@ -14,11 +14,14 @@ export default function Result() {
     fetchResult()
   }, [])
   return (
-    <>
-      <h2>Resultado</h2>
+    <div className="mb-3">
+      <h1 className='title'>Resultado</h1>
       <br></br>
-      <h3>TIR:</h3>
-      <h3>VAN:</h3>
-    </>
+      <h5>TIR_Emisor:</h5>
+      <h5>TIR_Escudo:</h5>
+      <h5>TIR_Bonista:</h5>
+      <h5>Precio Bono:</h5>
+      <h5>VAN:</h5>
+    </div>
   )
 }
