@@ -45,7 +45,7 @@ const LoginForm = () => {
               "Plazo": parseFloat(values.Plazo),
               "Cupon":parseFloat(values.TC),
               "TasaInteresMercado": parseFloat(values.TIM),
-              "PrimaRedencio": parseFloat(values.PM),
+              "PrimaRedencion": parseFloat(values.PM),
               "Estructuracion": parseFloat(values.ESTR),
               "Colocacion": parseFloat(values.COL),
               "Flotacion" : parseFloat(values.FLO),
