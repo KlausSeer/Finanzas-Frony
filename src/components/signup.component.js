@@ -43,7 +43,7 @@ const SignupForm = () => {
           //     "Password": values.password,
           //     "Apellido": values.apellido
           //   }})
-          axios.post('https://finanzasapirestful.azurewebsites.net/api/Usuarios', {user})
+          axios.post('https://finanzasapirestful.azurewebsites.net/api/Usuarios', user)
             .then(res=>{
             console.log(res);
             setSubmitting(false);

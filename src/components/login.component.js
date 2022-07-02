@@ -37,7 +37,7 @@ const LoginForm = () => {
           //     "Password": values.password,
           //     "Apellido": "_"
           //   }})
-          axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', {user})
+          axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', user)
           .then(res=>{
             console.log(res);
             setSubmitting(false);
