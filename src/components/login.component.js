@@ -19,18 +19,32 @@ const LoginForm = () => {
         setTimeout(() => {
           const user = {
             "Correo": values.correo,
-            "Nombres": "",
+            "Nombres": "_",
             "Password": values.password,
-            "Apellido": ""
+            "Apellido": "_"
           }
-          axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', {user}).then(res=>{
+
+          //axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', {user})
+          console.log(user);
+
+          axios.post({
+            method: 'post',
+            url: 'https://finanzasapirestful.azurewebsites.net/api/SignIn',
+            headers: {}, 
+            data: {
+              "Correo": values.correo,
+              "Nombres": "_",
+              "Password": values.password,
+              "Apellido": "_"
+            }})
+          .then(res=>{
             console.log(res);
             setSubmitting(false);
             navigate('/calculate');
           }).catch(err=>{
             console.error(err);
           })
-        }, 400);
+        }, 100);
       }}
     >
       <Form>

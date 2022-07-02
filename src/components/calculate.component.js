@@ -55,18 +55,42 @@ const LoginForm = () => {
               "IdUsuario": 1,
               "IdFrecuencia": 1
           }
-          axios.post('https://finanzasapirestful.azurewebsites.net/api/DatosBonos', {calcu}).then(res=>{
+
+          console.log(calcu);
+
+          //axios.post('https://finanzasapirestful.azurewebsites.net/api/DatosBonos', {calcu})
+          axios.post({
+            method: 'post',
+            url: 'https://finanzasapirestful.azurewebsites.net/api/DatosBonos',
+            headers: {}, 
+            data: {
+              "ValorNominal": parseFloat(values.VN),
+              "ValorComercial": parseFloat(values.VC),
+              "Plazo": parseFloat(values.Plazo),
+              "Cupon":parseFloat(values.TC),
+              "TasaInteresMercado": parseFloat(values.TIM),
+              "PrimaRedencion": parseFloat(values.PM),
+              "Estructuracion": parseFloat(values.ESTR),
+              "Colocacion": parseFloat(values.COL),
+              "Flotacion" : parseFloat(values.FLO),
+              "Cavali" : parseFloat(values.CAV),
+              "GastosAdicionales" : parseFloat(values.GA),
+              "InflacionAnual" : parseFloat(values.INF),
+              "IdUsuario": 1,
+              "IdFrecuencia": 1
+            }})
+          .then(res=>{
             console.log(res);
             setSubmitting(false);
             navigate('/result');
           }).catch(err=>{
             console.error(err);
           })
-        }, 400);
+        }, 100);
       }}
     >
       <Form>
-        <h3>Bonista</h3>
+        <h4>Bonista</h4>
         
         <div>
           <label htmlFor="VN">Valor Nominal del Bono</label>
