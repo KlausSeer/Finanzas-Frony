@@ -17,26 +17,27 @@ const LoginForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          const user = {
+          const user = JSON.stringify({
             "Correo": values.correo,
             "Nombres": "_",
             "Password": values.password,
             "Apellido": "_"
-          }
+          })
 
-          //axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', {user})
+          
           console.log(user);
 
-          axios.post({
-            method: 'post',
-            url: 'https://finanzasapirestful.azurewebsites.net/api/SignIn',
-            headers: {}, 
-            data: {
-              "Correo": values.correo,
-              "Nombres": "_",
-              "Password": values.password,
-              "Apellido": "_"
-            }})
+          // axios.post({
+          //   method: 'post',
+          //   url: 'https://finanzasapirestful.azurewebsites.net/api/SignIn',
+          //   headers: {}, 
+          //   data: {
+          //     "Correo": values.correo,
+          //     "Nombres": "_",
+          //     "Password": values.password,
+          //     "Apellido": "_"
+          //   }})
+          axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', {user})
           .then(res=>{
             console.log(res);
             setSubmitting(false);
