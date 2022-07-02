@@ -55,7 +55,7 @@ const LoginForm = () => {
               "IdUsuario": 1,
               "IdFrecuencia": 1
           }
-          axios.post('https://finanzasapirestful.azurewebsites.net/DatosBono', {calcu}).then(res=>{
+          axios.post('https://finanzasapirestful.azurewebsites.net/api/DatosBonos', {calcu}).then(res=>{
             console.log(res);
             setSubmitting(false);
             navigate('/result');

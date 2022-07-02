@@ -8,13 +8,11 @@ const LoginForm = () => {
   const navigate = useNavigate();
   return (
     <Formik
-      initialValues={{ user: '', password: ''}}
+      initialValues={{ correo: '', password: ''}}
       validationSchema={Yup.object({
-        user: Yup.string()
-          .max(15, 'Must be 15 characters or less')
+        correo: Yup.string()
           .required('Required'),
         password: Yup.string()
-          .max(20, 'Must be 20 characters or less')
           .required('Required')
       })}
       onSubmit={(values, { setSubmitting }) => {
@@ -25,7 +23,7 @@ const LoginForm = () => {
             "Password": values.password,
             "Apellido": ""
           }
-          axios.post('https://finanzasapirestful.azurewebsites.net/SignIn', {user}).then(res=>{
+          axios.post('https://finanzasapirestful.azurewebsites.net/api/SignIn', {user}).then(res=>{
             console.log(res);
             setSubmitting(false);
             navigate('/calculate');
@@ -39,9 +37,9 @@ const LoginForm = () => {
         <h3>Sign In</h3>
         
         <div className="mb-3">
-          <label htmlFor="email">Correo</label>
-          <Field name="email" type="text" className="form-control" placeholder="Correo"/>
-          <ErrorMessage name="email" />
+          <label htmlFor="correo">Correo</label>
+          <Field name="correo" type="email" className="form-control" placeholder="Correo"/>
+          <ErrorMessage name="correo" />
         </div>
 
         <div className="mb-3">
